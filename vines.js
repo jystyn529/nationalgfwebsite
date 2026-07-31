@@ -1,6 +1,13 @@
 (function injectFlowerVines() {
-  if (document.body.classList.contains('home-page')) return;
-  if (document.querySelector('.flower-vines')) return;
+  window.syncFlowerVines = function syncFlowerVines() {
+    const existing = document.querySelector('.flower-vines');
+
+    if (document.body.classList.contains('home-page')) {
+      existing?.remove();
+      return;
+    }
+
+    if (existing) return;
 
   const ambient = document.querySelector('.ambient');
   if (!ambient) return;
@@ -91,4 +98,7 @@
   requestAnimationFrame(() => {
     document.querySelector('.flower-vines')?.classList.add('vine-active');
   });
+  };
+
+  window.syncFlowerVines();
 })();

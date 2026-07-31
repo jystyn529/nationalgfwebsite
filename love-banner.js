@@ -1,6 +1,14 @@
 (function injectLoveBanner() {
-  if (document.body.classList.contains('home-page')) return;
-  if (document.querySelector('.subpage-love-banner')) return;
+  window.syncLoveBanner = function syncLoveBanner() {
+    const existing = document.querySelector('.subpage-love-banner');
+
+    if (document.body.classList.contains('home-page')) {
+      existing?.remove();
+      document.body.classList.remove('has-love-banner');
+      return;
+    }
+
+    if (existing) return;
 
   const nav = document.querySelector('.subpage-nav') || document.querySelector('.menu-bar');
   const bannerHTML = `
@@ -87,4 +95,7 @@
   requestAnimationFrame(() => {
     document.querySelector('.subpage-love-banner')?.classList.add('banner-active');
   });
+  };
+
+  window.syncLoveBanner();
 })();

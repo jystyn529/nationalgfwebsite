@@ -230,35 +230,38 @@
     <section class="pun-bar" aria-live="polite">
       <p class="pun-text" id="pun-text">I like you a latte</p>
     </section>
+  </div>
 
-    <div class="music-player" id="music-player">
-      <div class="player-controls">
-        <button type="button" id="prev-btn" aria-label="Previous song">⏮</button>
-        <button type="button" id="play-btn" aria-label="Play">▶</button>
-        <button type="button" id="next-btn" aria-label="Next song">⏭</button>
-      </div>
-      <div class="player-track">
-        <p class="player-title" id="song-title">—</p>
-        <div class="player-progress-wrap">
-          <span class="player-time" id="time-current">0:00</span>
-          <div class="player-progress" id="progress-bar">
-            <div class="player-progress-fill" id="progress-fill"></div>
-          </div>
-          <span class="player-time" id="time-total">0:00</span>
-        </div>
-      </div>
-      <div class="player-volume-wrap">
-        <button type="button" class="player-volume-toggle" aria-label="Volume">🔊</button>
-        <div class="player-volume-popup" role="group" aria-label="Volume">
-          <input type="range" id="volume-slider" min="0" max="100" value="80" aria-label="Volume">
-        </div>
-      </div>
-      <audio id="audio-player" preload="metadata"></audio>
+  <div class="music-player" id="music-player">
+    <div class="player-controls">
+      <button type="button" id="prev-btn" aria-label="Previous song">⏮</button>
+      <button type="button" id="play-btn" aria-label="Play">▶</button>
+      <button type="button" id="next-btn" aria-label="Next song">⏭</button>
     </div>
+    <div class="player-track">
+      <p class="player-title" id="song-title">—</p>
+      <div class="player-progress-wrap">
+        <span class="player-time" id="time-current">0:00</span>
+        <div class="player-progress" id="progress-bar">
+          <div class="player-progress-fill" id="progress-fill"></div>
+        </div>
+        <span class="player-time" id="time-total">0:00</span>
+      </div>
+    </div>
+    <div class="player-volume-wrap">
+      <button type="button" class="player-volume-toggle" aria-label="Volume">🔊</button>
+      <div class="player-volume-popup" role="group" aria-label="Volume">
+        <input type="range" id="volume-slider" min="0" max="100" value="80" aria-label="Volume">
+      </div>
+    </div>
+    <audio id="audio-player" preload="metadata"></audio>
   </div>
 
   <script src="intro.js"></script>
+  <script src="love-banner.js"></script>
+  <script src="vines.js"></script>
   <script src="player.js"></script>
   <script src="puns.js"></script>
+  <script src="spa-nav.js"></script>
 </body>
 </html>

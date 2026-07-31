@@ -10,6 +10,7 @@ const puns = [
 ];
 
 let punIndex = 0;
+let punTimer = null;
 
 function cyclePun() {
   const el = document.getElementById('pun-text');
@@ -24,10 +25,19 @@ function cyclePun() {
   }, 400);
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+window.initPuns = function initPuns() {
+  if (punTimer) {
+    clearInterval(punTimer);
+    punTimer = null;
+  }
+
   const el = document.getElementById('pun-text');
   if (!el) return;
 
-  el.textContent = puns[0];
-  setInterval(cyclePun, 4000);
+  el.textContent = puns[punIndex];
+  punTimer = setInterval(cyclePun, 4000);
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+  window.initPuns?.();
 });

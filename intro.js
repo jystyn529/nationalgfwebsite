@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+window.initIntro = function initIntro() {
   const overlay = document.getElementById('intro-overlay');
   const envelope = document.getElementById('envelope-btn');
   const main = document.getElementById('main-content');
@@ -11,14 +11,21 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   document.body.classList.add('intro-active');
-  envelope.addEventListener('click', () => unlock(true));
-  envelope.addEventListener('keydown', (e) => {
+  overlay.classList.remove('hidden', 'fade-out');
+  overlay.removeAttribute('aria-hidden');
+  main.classList.remove('unlocked', 'intro-animate');
+
+  envelope.replaceWith(envelope.cloneNode(true));
+  const freshEnvelope = document.getElementById('envelope-btn');
+
+  freshEnvelope.addEventListener('click', () => unlock(true));
+  freshEnvelope.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
       unlock(true);
     }
   });
-});
+};
 
 function unlock(animate) {
   const overlay = document.getElementById('intro-overlay');
@@ -55,3 +62,7 @@ function unlock(animate) {
     overlay.setAttribute('aria-hidden', 'true');
   }, { once: true });
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  window.initIntro?.();
+});

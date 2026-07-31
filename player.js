@@ -193,7 +193,12 @@ function setPlaying(playing) {
   savePlayerState();
 }
 
+let eventsBound = false;
+
 function bindEvents() {
+  if (eventsBound || !playBtn) return;
+  eventsBound = true;
+
   playBtn.addEventListener('click', () => {
     if (isPlaying) {
       audio.pause();
@@ -255,6 +260,21 @@ function formatTime(seconds) {
   const s = Math.floor(seconds % 60);
   return `${m}:${s.toString().padStart(2, '0')}`;
 }
+
+window.syncPlayerUI = function syncPlayerUI() {
+  if (!audio || !playBtn) return;
+
+  const track = playlist[currentIndex];
+  if (track && songTitle) songTitle.textContent = track.title;
+
+  playBtn.textContent = isPlaying ? '⏸' : '▶';
+  playBtn.setAttribute('aria-label', isPlaying ? 'Pause' : 'Play');
+
+  if (audio.duration) {
+    if (timeTotal) timeTotal.textContent = formatTime(audio.duration);
+    updateProgressUI();
+  }
+};
 
 window.addEventListener('site-unlocked', startPlayback);
 
