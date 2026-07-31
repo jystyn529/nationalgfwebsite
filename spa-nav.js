@@ -22,6 +22,21 @@
     return url.href;
   }
 
+  function prepareHomeContent(doc) {
+    if (!doc.body.classList.contains('home-page')) return;
+    if (sessionStorage.getItem('introUnlocked') !== 'true') return;
+
+    doc.getElementById('intro-overlay')?.remove();
+
+    const main = doc.getElementById('main-content');
+    if (main) {
+      main.classList.add('unlocked');
+      main.classList.remove('intro-animate');
+    }
+
+    doc.querySelector('.flower-garden')?.classList.add('bloom-active');
+  }
+
   function getBodyContent(doc) {
     const clone = doc.getElementById(PRESERVE_ID);
     clone?.remove();
@@ -63,6 +78,7 @@
 
     const html = await res.text();
     const doc = new DOMParser().parseFromString(html, 'text/html');
+    prepareHomeContent(doc);
     const nextContent = getBodyContent(doc);
     const player = document.getElementById(PRESERVE_ID);
 
