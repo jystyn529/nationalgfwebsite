@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fav Food Spots</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="food-page">
+  <div class="ambient" aria-hidden="true">
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+    <div class="glow glow-3"></div>
+  </div>
+
+  <nav class="menu-bar subpage-nav">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="memories.html">Favourite Memories</a></li>
+      <li><a href="letter.html">Letter</a></li>
+      <li><a href="food.html" class="active">Fav Food Spots</a></li>
+      <li><a href="reasons.html">Reasons Why You're Awesome</a></li>
+    </ul>
+  </nav>
+
+  <main class="page-main food-main">
+    <div class="page-frame">
+      <span class="frame-corner frame-tl" aria-hidden="true">♥</span>
+      <span class="frame-corner frame-tr" aria-hidden="true">♥</span>
+      <span class="frame-corner frame-bl" aria-hidden="true">♥</span>
+      <span class="frame-corner frame-br" aria-hidden="true">♥</span>
+
+      <div class="section-card food-card">
+        <div class="food-header">
+          <span class="food-ornament" aria-hidden="true">✦</span>
+          <h2>Fav Food Spots</h2>
+          <span class="food-ornament" aria-hidden="true">✦</span>
+        </div>
+        <p class="food-intro">Places we love to eat together.</p>
+
+        <div class="food-grid">
+          <article class="food-spot" style="--delay: 0s; --tilt: -3deg;">
+            <div class="heart-orbit" aria-hidden="true">
+              <span class="orbit-heart">♥</span>
+              <span class="orbit-heart">♥</span>
+              <span class="orbit-heart">♥</span>
+              <span class="orbit-heart">♥</span>
+            </div>
+            <figure class="food-frame">
+              <div class="food-photo">
+                <img src="images/food2.jpg" alt="Food spot 1" onerror="this.hidden=true;this.nextElementSibling.hidden=false">
+                <span class="photo-placeholder" hidden>Add photo — food1.jpg</span>
+              </div>
+              <figcaption class="food-caption">
+                <span class="food-tag">Our go-to</span>
+                <h3>Big Way Hotpot</h3>
+                <p>Always getting the bean curd :p</p>
+              </figcaption>
+            </figure>
+          </article>
+
+          <article class="food-spot" style="--delay: 0.25s; --tilt: 2deg;">
+            <div class="heart-orbit" aria-hidden="true">
+              <span class="orbit-heart">♥</span>
+              <span class="orbit-heart">♥</span>
+              <span class="orbit-heart">♥</span>
+              <span class="orbit-heart">♥</span>
+            </div>
+            <figure class="food-frame">
+              <div class="food-photo">
+                <img src="images/food1.jpg" alt="Food spot 2" onerror="this.hidden=true;this.nextElementSibling.hidden=false">
+                <span class="photo-placeholder" hidden>Add photo — food2.jpg</span>
+              </div>
+              <figcaption class="food-caption">
+                <span class="food-tag">Date night</span>
+                <h3>Sura</h3>
+                <p>Highkey loved the seafood pancake there</p>
+              </figcaption>
+            </figure>
+          </article>
+
+          <article class="food-spot" style="--delay: 0.5s; --tilt: -2deg;">
+            <div class="heart-orbit" aria-hidden="true">
+              <span class="orbit-heart">♥</span>
+              <span class="orbit-heart">♥</span>
+              <span class="orbit-heart">♥</span>
+              <span class="orbit-heart">♥</span>
+            </div>
+            <figure class="food-frame">
+              <div class="food-photo">
+                <img src="images/food3.jpg" alt="Food spot 3" onerror="this.hidden=true;this.nextElementSibling.hidden=false">
+                <span class="photo-placeholder" hidden>Add photo — food3.jpg</span>
+              </div>
+              <figcaption class="food-caption">
+                <span class="food-tag">Sweet treat</span>
+                <h3>Earnest/Rain or Shine Ice Cream</h3>
+                <p>Best post meal sweet treats for sure</p>
+              </figcaption>
+            </figure>
+          </article>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p><a href="index.html">← Back to Home</a></p>
+  </footer>
+
+  <div class="music-player" id="music-player">
+    <div class="player-controls">
+      <button type="button" id="prev-btn" aria-label="Previous song">⏮</button>
+      <button type="button" id="play-btn" aria-label="Play">▶</button>
+      <button type="button" id="next-btn" aria-label="Next song">⏭</button>
+    </div>
+    <div class="player-track">
+      <p class="player-title" id="song-title">—</p>
+      <div class="player-progress-wrap">
+        <span class="player-time" id="time-current">0:00</span>
+        <div class="player-progress" id="progress-bar">
+          <div class="player-progress-fill" id="progress-fill"></div>
+        </div>
+        <span class="player-time" id="time-total">0:00</span>
+      </div>
+    </div>
+    <div class="player-volume-wrap">
+      <button type="button" class="player-volume-toggle" aria-label="Volume">🔊</button>
+      <div class="player-volume-popup" role="group" aria-label="Volume">
+        <input type="range" id="volume-slider" min="0" max="100" value="80" aria-label="Volume">
+      </div>
+    </div>
+    <audio id="audio-player" preload="metadata"></audio>
+  </div>
+
+  <script src="love-banner.js"></script>
+  <script src="vines.js"></script>
+  <script src="player.js"></script>
+</body>
+</html>
