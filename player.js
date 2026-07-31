@@ -188,6 +188,9 @@ function startPlayback() {
 
 function setPlaying(playing) {
   isPlaying = playing;
+  if (audio) {
+    audio.dataset.shouldPlay = playing ? 'true' : 'false';
+  }
   playBtn.textContent = playing ? '⏸' : '▶';
   playBtn.setAttribute('aria-label', playing ? 'Pause' : 'Play');
   savePlayerState();
@@ -269,10 +272,15 @@ window.syncPlayerUI = function syncPlayerUI() {
 
   playBtn.textContent = isPlaying ? '⏸' : '▶';
   playBtn.setAttribute('aria-label', isPlaying ? 'Pause' : 'Play');
+  audio.dataset.shouldPlay = isPlaying ? 'true' : 'false';
 
   if (audio.duration) {
     if (timeTotal) timeTotal.textContent = formatTime(audio.duration);
     updateProgressUI();
+  }
+
+  if (isPlaying && audio.paused) {
+    audio.play().catch(() => setPlaying(false));
   }
 };
 

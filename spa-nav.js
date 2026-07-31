@@ -22,6 +22,23 @@
     return url.href;
   }
 
+  function normalizePageUrl(url) {
+    const parsed = new URL(url, location.href);
+    if (parsed.pathname.endsWith('/')) {
+      parsed.pathname += 'index.html';
+    }
+    return parsed.href;
+  }
+
+  async function fetchPage(url) {
+    const normalized = normalizePageUrl(url);
+    let res = await fetch(normalized);
+    if (!res.ok && !/\.html$/i.test(normalized)) {
+      res = await fetch(`${normalized.replace(/\/?$/, '/')}index.html`);
+    }
+    return res;
+  }
+
   function prepareHomeContent(doc) {
     if (!doc.body.classList.contains('home-page')) return;
     if (sessionStorage.getItem('introUnlocked') !== 'true') return;
@@ -69,10 +86,21 @@
     window.syncPlayerUI?.();
   }
 
+  function resumeMusicIfNeeded() {
+    const audio = document.getElementById('audio-player');
+    if (!audio || audio.dataset.shouldPlay !== 'true') return;
+    if (!audio.paused) return;
+
+    audio.play().catch(() => {
+      window.syncPlayerUI?.();
+    });
+  }
+
   async function navigateTo(url, push = true) {
-    const res = await fetch(url);
+    const pageUrl = normalizePageUrl(url);
+    const res = await fetchPage(pageUrl);
     if (!res.ok) {
-      location.href = url;
+      location.href = pageUrl;
       return;
     }
 
@@ -82,7 +110,6 @@
     const nextContent = getBodyContent(doc);
     const player = document.getElementById(PRESERVE_ID);
 
-    if (player) player.remove();
     removePageContent();
 
     document.body.className = doc.body.className;
@@ -91,12 +118,13 @@
     if (player) document.body.appendChild(player);
 
     document.title = doc.title;
-    syncNavActive(new URL(url, location.href).pathname);
+    syncNavActive(new URL(pageUrl, location.href).pathname);
 
-    if (push) history.pushState({ spa: true, url }, '', url);
+    if (push) history.pushState({ spa: true, url: pageUrl }, '', pageUrl);
 
     window.scrollTo(0, 0);
     runPageScripts();
+    resumeMusicIfNeeded();
   }
 
   document.addEventListener('click', (e) => {
